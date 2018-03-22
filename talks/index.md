@@ -3,7 +3,7 @@ layout: page
 title: Education
 ---
 
-<div class="projects">
+<div class="Education">
   {% for project in site.projects %}
   <div class="project post">
     <h2 class="project-title post-title">
