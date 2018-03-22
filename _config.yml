@@ -10,8 +10,8 @@ permalink:              /blog/:categories/:title/
 # permalink:            blog/:categories/:year/:month/:day/:title/
 
 # Setup
-title:            'Anjana Sofia Vakil'
-name:             'Anjana Sofia Vakil'
+title:            'Sunitha Narayan'
+name:             'Sunitha Narayan'
 #tagline:          ''
 description:      'Language technologist and software developer'
 #url:              http://vakila.github.io/
@@ -23,10 +23,10 @@ images:         '/img'
 pdfs:           '/pdf'
 
 author:
-  name:           'Anjana Sofia Vakil'
-  url:            vakila.github.io
+  name:           'Sunitha Narayan'
+  url:            hyde
   email:          'anjanavakil@gmail.com'
-  github:         'https://github.com/vakila'
+  github:         'https://github.com/sunithan29'
   facebook:       'http://www.facebook.com/anjana.vakil'
   twitter:        'https://twitter.com/AnjanaVakil'
   googleplus:     ''
@@ -39,7 +39,7 @@ paginate:         3
 version:          2.1.0
 
 github:
-  repo:           https://github.com/vakila/vakila.github.io
+  repo:           https://github.com/sunithan29/hyde
 
 # Collections
 collections:
