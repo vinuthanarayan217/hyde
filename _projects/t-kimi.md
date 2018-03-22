@@ -1,7 +1,6 @@
 ---
 title: "Malicious traffic detection and redirection to Web Application Honeypot that reveals attacker’s identity"
 tagline: "Web Honeypot"
-website: "https://github.com/vakila/kimi"
 skills: ["Python", "HTML"]
 ---
 
