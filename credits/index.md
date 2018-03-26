@@ -10,6 +10,5 @@ incorporating some designs from <a href="http://alexandrevicenzi.com" target="_b
 <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme for
 <a href="http://getpelican.com" target="_blank">Pelican</a>, along with other modifications.
 
-Resume built with <a href="https://www.latex-project.org/">LaTeX</a> using a modified version of the <a href="http://www.latextemplates.com/template/friggeri-resume-cv">Friggeri Resume/CV</a> template originally created by <a href="https://github.com/afriggeri">Adrien Friggeri</a>. 
 
 &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
