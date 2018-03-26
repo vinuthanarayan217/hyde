@@ -25,12 +25,12 @@ pdfs:           '/pdf'
 author:
   name:           'Sunitha Narayan'
   url:            hyde
-  email:          'anjanavakil@gmail.com'
+  email:          'sunithan@iisc.ac.in'
   github:         'https://github.com/sunithan29'
-  facebook:       'http://www.facebook.com/anjana.vakil'
-  twitter:        'https://twitter.com/AnjanaVakil'
+  facebook:       'https://www.facebook.com/evstride'
+  twitter:        'https://twitter.com/sunithan29'
   googleplus:     ''
-  linkedin:       'https://www.linkedin.com/in/anjanavakil '
+  #linkedin:       'https://www.linkedin.com/in/anjanavakil '
 
 paginate:         3
 # paginate_path:    "/blog/page:num/"
