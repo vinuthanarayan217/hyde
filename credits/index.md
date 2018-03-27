@@ -11,4 +11,4 @@ incorporating some designs from <a href="http://alexandrevicenzi.com" target="_b
 <a href="http://getpelican.com" target="_blank">Pelican</a>, along with other modifications.
 
 
-&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
+&copy; 2016 {{ site.author.name }}
