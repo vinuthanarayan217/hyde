@@ -9,5 +9,7 @@ Prior to this, I obtained a Bachelor's in Engineering from VTU in 2014. During m
 
 You can find more about my [research projects](https://sunithan29.github.io/hyde/projects/) and [education](https://sunithan29.github.io/hyde/education/) here. 
 
-!['Git Commit' on XKCD](https://github.com/sunithan29/hyde/blob/gh-pages/pdf/Sunitha__CCNA_Certificate.pdf)
-*[ccna](https://github.com/sunithan29/hyde/blob/gh-pages/pdf/Sunitha__CCNA_Certificate.pdf)*
+<span style="float: left"> ![CCNA cert] (https://github.com/sunithan29/hyde/blob/gh-pages/pdf/Sunitha__CCNA_Certificate.pdf)
+ </span>
+
+
