@@ -13,7 +13,7 @@ permalink:              /blog/:categories/:title/
 title:            'Sunitha Narayan'
 name:             'Sunitha Narayan'
 #tagline:          ''
-description:      'My primary research focus is cryptography and security'
+description:      'Research: Network Security & Applied Cryptography'
 #url:              http://vakila.github.io/
 baseurl:
 # blogurl:          /blog/
