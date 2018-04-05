@@ -3,4 +3,4 @@ layout: post
 title: Network Monitoring and Security 
 ---
 Anomaly detection, Machine Learning, 
-### Built on Poole
+# In this project a novel architecture to secure an Enterprise Network was implementated. 
