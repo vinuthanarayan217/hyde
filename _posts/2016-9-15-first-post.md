@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introducing Hyde
+title: Network Monitoring and Security 
 ---
-hello
+Anomaly detection, Machine Learning, 
 ### Built on Poole
