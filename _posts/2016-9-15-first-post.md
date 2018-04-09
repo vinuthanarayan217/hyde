@@ -18,6 +18,7 @@ In an enterprise network, the regulation of traffic is achieved by means of a ne
 ![en1](https://user-images.githubusercontent.com/25291535/38505611-3c02b6aa-3c35-11e8-97c0-eacbe793f5fb.JPG)
 
 **Functional Aspects: **
+
 The architecture presents a concept of “Smart Router” and “Analyzer Agent”.
 
 * **Smart Router:** As shown in Fig. 1, “Smart Router” is a device in the DMZ. It has a sub-sampling software for analyzing the incoming/outgoing packets. It contacts the “Database” for taking the decision on whether to allow or drop the packets. The “Database” maintains lists of allowed and blocked hosts, defined in Whitelist and Blacklist, respectively. These lists contain IP addresses and a timeout period associated with hosts. An entry in such list is valid till timeout occurs. This ensures smooth network access for benign users while not assuming that they will remain so, forever.
@@ -43,6 +44,16 @@ The architecture presents a concept of “Smart Router” and “Analyzer Agent�
   * It means that the “Analyzer Agent” was unable to identify the flow as either True or False Positive.
   * The policy for handling such flows can be defined by the network administrators.
   
- 
- 
+While examining packets in the flow, the “Analyzer Agent” utilizes information present in the header part of the packets. Here, it does not look at the payload part of the packet but the characteristics of the payload such as the size, number of fragments etc. 
+
+## Process Flowcharts
+
+Implementation of the proposed architecture has two processes that run in parallel which shows the flow of packet in the core part of the “Smart Router”. The IP packet enters the queue managed by NFQUEUE module. The packets arriving in this queue can be taken to the “User-Space” by binding to the queue. The “Analyzer Agent” terminates in case queue is not present. After successfully binding to the queue, a callback function is registered with the Kernel. This function is called everytime a packet arrives in the queue. Management of functionalities, that require meeting timing requirements, is handled by the timers.
+
+Each RAW packet in the queue is converted into a “Packet Object” and matched for Blacklisted IPs in the Database. If a match is found, the packet verdict is set as “DROP” and the Kernel drops the packet. The “Packet Object” goes to a “Packet to Flow Converter” for conversion into “Flow Objects” if no match is found. A “Flow Manager” module manages the sub-sampled network flows in three parallel python dictionary objects, wherein it monitors currently running flows, future flows and finished flows. The time management module handles the interaction between these flow threads. A duration specified by “FLOWDURATION” is used to terminate the sub-sampled flows. The starting time, when the first packet is seen between an IP pair, is noted for each sub-sampled flow. This flow is then observed for the FLOWDURATION period. After that, it is moved to finished flows python dictionary object. Here, it gets analyzed for malicious activity by the behavior based machine learning algorithm. We have used K-Means clustering algorithm for clustering the sub-sampled flows in normal and anomalous flows. If the flow is identified as anomalous, then the packet verdict is set as “DROP” for all the packets belonging to the anomalous flow. The IP addresses of the flow get updated in the “Blacklist IP” database along with a blocking timeout. (For repeatedly offending hosts, this duration increases linearly/exponentially depending on the “Smart Router” settings.)
+If the flow is identified as normal, then the packet verdict is set as “ACCEPT” for all the packets belonging to the that flow. These decisions stay in effect for the blocking timeout duration for the flows enqueued in the future flow python dictionary object. 
+
+Fig. 4 shows the flow chart for the RAW network traffic capture process. The packets are initially logged in the Random Access Memory (RAM) of the “Smart Router” to avoid Kernel packet drops.  
+
+![4](https://user-images.githubusercontent.com/25291535/38508126-edf89068-3c3b-11e8-99b6-ab26b192ac01.png)
 
