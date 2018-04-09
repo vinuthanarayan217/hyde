@@ -69,7 +69,7 @@ Algorithm 2 describes the logic used for generating a Flow Object from a set of 
 
 In the implemented solution, we have used the K-Means clustering ML algorithm for behavior based anomaly detection. It involves following steps.
 1) Initialize K Centroids Randomly.
-2) Data Assignment Step: Assign each flow object to the group that has the closest centroid.
+**2) Data Assignment Step:** Assign each flow object to the group that has the closest centroid.
   
   *  If ci is the collection of centroids in set C, then each data point x is assigned to a cluster based on 
      
@@ -80,10 +80,24 @@ In the implemented solution, we have used the K-Means clustering ML algorithm fo
      
    * Let the set of data point assignments for each ith cluster centroid be Si.
  
- 3) Centroid Update Step: When all the flow objects have been assigned, recalculate the positions of the K centroids.
+**3) Centroid Update Step:** When all the flow objects have been assigned, recalculate the positions of the K centroids.
    
    * This is done by taking the mean of all data points assigned to that centroid’s cluster.
    
-   
+   ![sig](https://user-images.githubusercontent.com/25291535/38508487-f9f3c3a0-3c3c-11e8-98d3-c37c51b79204.png)
+
+The algorithm iterates between steps two and three until an exit criteria is met (i.e., no data points change clusters, the sum of the distances is minimized, or some maximum number of iterations is reached). The K-Means algorithm is guaranteed to converge to a result. The running “Flow Objects” are clustered based on the minimum of two “Euclidean Distances”, measured from the normal and anomalous cluster centroids. These clusters are identified by manual inspection in the initial stage.
+
+## Network Statistics
+
+**Table I** shows the trade-off between analysis depth and the network throughput. The analysis depth is the number of packets that are analyzed for creation of “Flow Objects”. As the depth reduces, information content of the “Flow Objects” get affected. The features used to identify the malicious “Flow Objects” are reported to the “Smart Router” by distributed nodes in the network. Hence, from the perspective of the ML algorithm, the required features are present in the “Flow Objects” and improvement in throughput is achieved as a result of sub-sampling the packets that make the network traffic.Thus, even after reducing the analysis depth, performance of the ML algorithm does not degrade.    
+
+**Table II** shows the effect of Kernel buffer size on the packet loss incurred in the packet capture process. The packer capture process is a combination of network card,libpcap(capture filter), capture tool(DUMPCAP) and the hard disk drive, working as a single system. Increasing the Kernel Buffer size only increases the memory allocated to the network card for storing the incoming packets. As observed from Table II, increasing this buffer size beyond 100 MiB does not improve the packet loss, as other components of the system degrade the performance.
+
+![2tab](https://user-images.githubusercontent.com/25291535/38508772-b1a6d866-3c3d-11e8-8611-44d83f1cf7fc.png)
+
+## Memory Usage:
+
+The “Smart Router” uses 100 MB of Kernel Buffer for capturing of RAW packets and extra 100 - 300 MB for processing the flows. In case of heavy packet rate, it might go up to a maximum of 500 MB.   
 
 
