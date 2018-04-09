@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Enterprise Network Security and Monitoring"
+title: "Decentralizing authentication and authorization in embedded devices"
 ---
 
 Test
