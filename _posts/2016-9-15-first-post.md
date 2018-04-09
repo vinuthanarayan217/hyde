@@ -57,3 +57,33 @@ Fig. 4 shows the flow chart for the RAW network traffic capture process. The pac
 
 ![4](https://user-images.githubusercontent.com/25291535/38508126-edf89068-3c3b-11e8-99b6-ab26b192ac01.png)
 
+## Algorithms
+
+The implementation of the “Smart Router” uses conceptsof “Packet Object” and “Flow Object”. Algorithm 1 describes the logic used for generating a “Packet Object” from the RAW packet in the NFQUEUE. 
+
+![algo 1](https://user-images.githubusercontent.com/25291535/38508201-1ff83406-3c3c-11e8-835e-6083e2ad4f8b.png)
+
+Algorithm 2 describes the logic used for generating a Flow Object from a set of Packet Objects in memory. Each flow is identified by <Src.IP, Dst.IP, Protocol>. All “Packet Objects” corresponding to these criteria are gathered and sorted according to the timestamp. “Flow Objects” are created on the basis of criteria along with a FLOWDURATION value. For TCP sessions, in addition to FLOWDURATION criteria, a flow is initiated only after the regular TCP threeway handshake has been established. The termination criteria for a TCP flow is met either by FLOWDURATION or the TCP close connection sequence (in terms of FIN packets or RST packets), whichever is encountered first. In case of UDPs (virtual) flows, only the FLOWDURATION can be employed. FLOWDURATION is a “tunable” parameter, decided by a network administrator based on the understanding of the network.
+
+![algo2](https://user-images.githubusercontent.com/25291535/38508249-4b5ebc14-3c3c-11e8-94da-4bc61d2d6ad8.png)
+
+In the implemented solution, we have used the K-Means clustering ML algorithm for behavior based anomaly detection. It involves following steps.
+1) Initialize K Centroids Randomly.
+2) Data Assignment Step: Assign each flow object to the group that has the closest centroid.
+  
+  *  If ci is the collection of centroids in set C, then each data point x is assigned to a cluster based on 
+     
+     ![eq1](https://user-images.githubusercontent.com/25291535/38508369-a73d2930-3c3c-11e8-99c6-557fd6767731.png)
+
+     
+     where dist() is the standard (L2) Euclidean Distance.
+     
+   * Let the set of data point assignments for each ith cluster centroid be Si.
+ 
+ 3) Centroid Update Step: When all the flow objects have been assigned, recalculate the positions of the K centroids.
+   
+   * This is done by taking the mean of all data points assigned to that centroid’s cluster.
+   
+   
+
+
