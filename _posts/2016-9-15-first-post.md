@@ -11,3 +11,6 @@ Our novel architecture has modules that support scalability by making use of par
 * The unsupervised ML algorithm used in the implementation dynamically evolves by observing the network behavior, which reduces the periodic manual reconfigurations. 
 * We have proposed and implemented a real-time classification and analyzing software unlike other solutions that work only on offline datasets. 
 
+![en1](https://user-images.githubusercontent.com/25291535/38505611-3c02b6aa-3c35-11e8-97c0-eacbe793f5fb.JPG)
+
+
