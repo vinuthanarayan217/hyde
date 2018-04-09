@@ -3,7 +3,8 @@ layout: post
 title: "Decentralizing authentication and authorization in embedded devices"
 ---
 
-Keykerms: Machine Learning and Network security
+Keyterms: Machine Learning and Network security
+
 GitHub Repo: [Link](https://github.com/sunithan29/Network_security_analyser)
 
 The proposed architecture uses the idea of decentralizing authentication and authorization by using local Certifying Authority(CA). It also off-loads the authentication and authorization processes from embedded devices to a local server.
