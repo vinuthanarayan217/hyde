@@ -13,4 +13,6 @@ Our novel architecture has modules that support scalability by making use of par
 
 ![en1](https://user-images.githubusercontent.com/25291535/38505611-3c02b6aa-3c35-11e8-97c0-eacbe793f5fb.JPG)
 
+## PROPOSED ARCHITECTURE
+
 
