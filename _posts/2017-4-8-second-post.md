@@ -27,7 +27,9 @@ In a PKI architecture CA is a third party that provides certificates to servers,
 
 ## B. Auth
 
-Auth is the central body that controls the communication amongst all entities in the network. Being an entity, Auth also needs to have a certificate signed by the local CA. To facilitate communication between entities, Auth requires to maintain four tables as given below: * **Group Table:** Contains information about the validity period for a given group name. 
+Auth is the central body that controls the communication amongst all entities in the network. Being an entity, Auth also needs to have a certificate signed by the local CA. To facilitate communication between entities, Auth requires to maintain four tables as given below:
+
+* **Group Table:** Contains information about the validity period for a given group name. 
 * **Entity Table:** Contains information of all the registered entities, which includes Entity Name, Group Name, Public Key, Distribution key, validity, IP address and Destination Port address.
 * **Access Table:** Contains information regarding authorization of an entity, i.e. whether an entity is allowed to access a particular entity/group.
 * **Session Table:** Contains information regarding active sessions between all the entities in network, such as session keys and their validities. Information is erased if validity of the session is over. 
