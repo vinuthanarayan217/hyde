@@ -22,9 +22,27 @@ The architecture presents a concept of “Smart Router” and “Analyzer Agent�
 
 * **Smart Router:** As shown in Fig. 1, “Smart Router” is a device in the DMZ. It has a sub-sampling software for analyzing the incoming/outgoing packets. It contacts the “Database” for taking the decision on whether to allow or drop the packets. The “Database” maintains lists of allowed and blocked hosts, defined in Whitelist and Blacklist, respectively. These lists contain IP addresses and a timeout period associated with hosts. An entry in such list is valid till timeout occurs. This ensures smooth network access for benign users while not assuming that they will remain so, forever.
  
- While analyzing a packet, “Smart Router” tries to find matching entries in the “Database”. If answer to such query is positive, it will either drop the packet and/or reset the connection. If the “Smart Router” is unable to find any matching entry in the “Database”, it will redirect the packets towards appropriate agent(s) for further inspection. The “Database” gets updated every time a malicious activity is detected. Hence, over the course of time, the whole network becomes self updating, eliminating the need for periodic manual reconfigurations.
+ * While analyzing a packet, “Smart Router” tries to find matching entries in the “Database”. If answer to such query is positive, it will either drop the packet and/or reset the connection. If the “Smart Router” is unable to find any matching entry in the “Database”, it will redirect the packets towards appropriate agent(s) for further inspection. The “Database” gets updated every time a malicious activity is detected. Hence, over the course of time, the whole network becomes self updating, eliminating the need for periodic manual reconfigurations.
  
-* **Analyzer Agent:** The “Smart Router” takes the initial decision with the help of existing “Database” and IDS. If it is not able to take routing decision after consulting the “Database”, it will redirect the packets towards the “Analyzer Agent”. They are computational units running machine learning based clustering algorithms. Based on the type of data to be analyzed, the algorithms are distributed amongst the “Analyzer Agent”. It forms flows from the received packets. Analysis of such flow can have following responses from the 'Analyzer Agent'
+* **Analyzer Agent:** The “Smart Router” takes the initial decision with the help of existing “Database” and IDS. If it is not able to take routing decision after consulting the “Database”, it will redirect the packets towards the “Analyzer Agent”. They are computational units running machine learning based clustering algorithms. Based on the type of data to be analyzed, the algorithms are distributed amongst the “Analyzer Agent”. It forms flows from the received packets. Analysis of such flow can have following responses from the 'Analyzer Agent'.
+
+**True Positive Response:**
+
+  * It means that the redirected flow was malicious.
+  * “Analyzer Agent” indicates to the “Smart Router” that it has to drop the packets associated with the flow and terminate the             connection.
+  * It then logs this instance in the “Database”.
+  *  The IP address, from which the malicious flow originated, is flagged as suspicious and all future traffic from the same IP address     is redirected to the “Analyzer Agent”.
+
+**False Positive Response:**
+
+  * It means that the redirected flow was not malicious.
+  * After manual inspection, such instances are logged in “Database” to prevent similar requests from arising in future.
+  
+**Ambiguous Response:**
+ 
+  * It means that the “Analyzer Agent” was unable to identify the flow as either True or False Positive.
+  * The policy for handling such flows can be defined by the network administrators.
+  
  
  
 
