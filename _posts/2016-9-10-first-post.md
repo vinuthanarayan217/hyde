@@ -21,6 +21,10 @@ Below, we define few terms that are used in this project.
 * Nonce: Nonce is a random number generated to verify the identity of a certificate owner. The random number is encrypted using public key   signed in certificate and sent to the owner. In return, the same random number is expected, since only the owner possesses private key,   only it can decrypt and send it back. 
 * Symmetrically Encrypted Message: It is a concatenation of encrypted message tag, cipher text, and its hash value. (The hash value must also contain the authentication details, for which we use distribution key in generation of hash)
 
+IoT devices are prone to attacks. **Table I** shows frequently observed attacks in a network to which, IoT systems are susceptible. Therefore, there is a need for lightweight, robust security mechanisms that provide authentication, authorization of the participants along with confidentiality and integrity of the data. To meet the need of a security system for constrained nodes, the IETF working group 'DTLS In Constrained Environments (DICE)' is making great efforts to make a DTLS profile for the IoT environment.
+
+![attacks](https://user-images.githubusercontent.com/25291535/38536610-c3d23e58-3ca7-11e8-8bc2-db9ab800e117.png)
+
 ## Local CA
 
 In a PKI architecture CA is a third party that provides certificates to servers, in general. In the proposed architecture, we use PKIs initial trust-building process between two parties. So every entity needs to have a certificate signed by CA. But it is expensive to get a certificate from globally well-known CAs and it is limited only to global IP addresses. In addition, it works on Trust Chains that are often not affordable for an embedded device. Therefore, in the proposed architecture, we use a public-private asymmetric key pair to certify/verifypublic modules of all the entities. Henceforth, this publicprivate asymmetric key pair is referred to as local CA.
@@ -37,6 +41,19 @@ Auth is the central body that controls the communication amongst all entities in
 Group Table and Access Table are used as inputs by Auth. Therefore, the information required in these tables has to be entered initially by the network administrator.
 
 Auth is a master entity that allows or rejects communication between two entities. It is also responsible for authenticating and authorizing an entity, generating and distributing DKs and SKs. Being a central command center, Auth by default becomes a prime target for attackers, therefore an Auth has to be a non resource-constrained device, withstanding all kinds of attacks on it. 
+
+## Stages for Secure Communication
+
+For all the entities, secure communication takes place in three stages as shown in Figure 1. Consider an example of a client entity E1 wants to communicate with a server entity E2. Auth server entity must be running before the communication process starts.
+
+**1) Registration:** Auth verifies the identity and information of the entities and registers them. The entities become part of the network. Communication between each entity and Auth is secured using DKs.
+
+**2) Session Key Distribution:** E1 requests Auth to grant communication session with E2. If allowed, Auth creates a secure link between E1 and E2 by distributing a SK. 
+
+**3) Communication:** Secure communication between E1 and E2 happens using SK.
+
+1) Registration Phase: Every entity has to register itself with Auth to become part of the communication network. The registration process is a two-step request-response sequence as shown in Figure 2. To register itself with Auth, an entity sends a message with registration request tag REQREG, its public information (i.e. entity name, group name, public key) and certificate
+
 
 
 The proposed communication architecture is implemented using Python and C languages. The python implementation targets non resource-constrained entities that have availability of Python 3.5 interpreter. The C implementation focuses on resource constraints and portability. The implementations use AES-CBC-128 and RSA-1024 as symmetric and asymmetric encryption algorithms, respectively. They use XORed double encryption of data for hash generation.
