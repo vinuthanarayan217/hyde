@@ -120,6 +120,8 @@ The python code implementation provides an entire secure communication architect
 
 The C implementation comprises of server and client entities. It provides portability files, that can be used to port the client/sever entity to any device and/or OS. Additionally, it is highly configurable and so provides freedom to an application developer to adapt the implementation and make it suitable for the corresponding platform. These properties are essential as IoT devices and their OSes are diverse. Because of these properties the foot-print of C implementation depends on its configuration. The minimum requirements are 2.5kB of ROM, 76B of DATA RAM and packet buffer size plus 20B of Stack RAM.
 
+In the proposed solution, we assume that the entities are already aware of Auth’s details like IP address, Name etc. The future versions may consist of an Auth Discovery Protocol that can identify available Auth servers in an existing network infrastructure. It may introduce timing synchronization and also extend support for publisher-subscriber protocol such as MQTT.
+
 **GitHub Repo:** [Link](https://github.com/sunithan29/embedded_security)
 
 
