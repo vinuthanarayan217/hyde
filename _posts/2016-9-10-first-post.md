@@ -54,6 +54,8 @@ For all the entities, secure communication takes place in three stages as shown 
 
 1) Registration Phase: Every entity has to register itself with Auth to become part of the communication network. The registration process is a two-step request-response sequence as shown in Figure 2. To register itself with Auth, an entity sends a message with registration request tag REQREG, its public information (i.e. entity name, group name, public key) and certificate. 
 
+![reg](https://user-images.githubusercontent.com/25291535/38537149-a04e8830-3caa-11e8-8753-35787cd31a1f.png)
+
 Figure 3(a). Auth validates the public information of an entity using local CA’s public key. Auth generates a nonce N1, encrypts it using the entity’s public key and sends nonce verification request message along with its own public information and certificate (Figure 3(b)). On arrival of this message, an entity validates Auth’s public information in a similar manner. It decrypts N1 using its private key, generates another nonce N2, encrypts both N1 and N2 using Auth’s public key and sends it back to Auth. This message is also tagged as nonce verification request message (Figure 3(c)).
 
 ![3](https://user-images.githubusercontent.com/25291535/38536797-b3d18ac6-3ca8-11e8-9f12-2cb41d03bf22.png)
@@ -66,9 +68,11 @@ a) Exceptions::
 
 By this procedure, E1 and E2 get registered and obtain DK1 and DK2 as distribution key, respectively.
 
-2) Session Key Distribution Phase:
+**2) Session Key Distribution Phase:**
 
 Every entity has to get a SK from Auth to communicate with any other entity in the network. The process of session key distribution is shown in Figure 4 and the formats of transmitted packets are shown in Figure 5. To get a session key, E1 symmetrically encrypts access request tag REQACC along with the name of E2 and the duration for which it intends to communicate, using DK1. The duration is specified in minutes. The message header is attached with the symmetrically encrypted message and sent to Auth (Figure 5(a)).
+
+
 
 On getting an encrypted message from E1, Auth generates hash value from cipher text and compares it with the received hash value to verify that integrity and authenticity of the cipher text is not violated. Auth then decrypts cipher text using DK1. It checks in Access Table whether E1 is authorized by the network administrator to communicate with E2. It grants E1 a session with E2 for up to the maximum duration specified in the Access Table. Auth then generates a session key (SK1) and updates the Session Table with related information. Auth encrypts access granted tag ACPTACC, E2’s information (name, IP and Port), SK1 and allowed duration using DK1, and sends a symmetrically encrypted message along with message header to E1(Figure 5(b)). After that, it encrypts access acknowledgment tag ACKACC, E1’s information, SK1 and allowed duration using DK2, and sends a symmetrically encrypted message along with message header to E2 (Figure 5(c)). On receiving an encrypted message from Auth, both E1 and E2 verify the integrity and authenticity of the received message by generating the hash value from cipher text and comparing it with the received hash value. Both entities decrypt message using their respective distribution keys. E1 updates its To Access Table with E2’s information, SK1 and granted duration. E2 updates its From Access Table with E1’s information, SK1 and granted duration. E2 then sends a symmetrically encrypted message with message header auth acknowledgment tag(ACKAUTH) to Auth. 
 
