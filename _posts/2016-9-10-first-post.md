@@ -70,8 +70,13 @@ By this procedure, E1 and E2 get registered and obtain DK1 and DK2 as distributi
 
 **2) Session Key Distribution Phase:**
 
-Every entity has to get a SK from Auth to communicate with any other entity in the network. The process of session key distribution is shown in Figure 4 and the formats of transmitted packets are shown in Figure 5. To get a session key, E1 symmetrically encrypts access request tag REQACC along with the name of E2 and the duration for which it intends to communicate, using DK1. The duration is specified in minutes. The message header is attached with the symmetrically encrypted message and sent to Auth (Figure 5(a)).
+Every entity has to get a SK from Auth to communicate with any other entity in the network. The process of session key distribution is shown in Figure 4 and the formats of transmitted packets are shown in Figure 5.
 
+![4](https://user-images.githubusercontent.com/25291535/38537161-b199a6ec-3caa-11e8-970c-1b69de25c4b0.png)
+
+ To get a session key, E1 symmetrically encrypts access request tag REQACC along with the name of E2 and the duration for which it intends to communicate, using DK1. The duration is specified in minutes. The message header is attached with the symmetrically encrypted message and sent to Auth (Figure 5(a)).
+ 
+ ![5](https://user-images.githubusercontent.com/25291535/38537251-32ef393c-3cab-11e8-89a8-8581763d4726.png)
 
 
 On getting an encrypted message from E1, Auth generates hash value from cipher text and compares it with the received hash value to verify that integrity and authenticity of the cipher text is not violated. Auth then decrypts cipher text using DK1. It checks in Access Table whether E1 is authorized by the network administrator to communicate with E2. It grants E1 a session with E2 for up to the maximum duration specified in the Access Table. Auth then generates a session key (SK1) and updates the Session Table with related information. Auth encrypts access granted tag ACPTACC, E2’s information (name, IP and Port), SK1 and allowed duration using DK1, and sends a symmetrically encrypted message along with message header to E1(Figure 5(b)). After that, it encrypts access acknowledgment tag ACKACC, E1’s information, SK1 and allowed duration using DK2, and sends a symmetrically encrypted message along with message header to E2 (Figure 5(c)). On receiving an encrypted message from Auth, both E1 and E2 verify the integrity and authenticity of the received message by generating the hash value from cipher text and comparing it with the received hash value. Both entities decrypt message using their respective distribution keys. E1 updates its To Access Table with E2’s information, SK1 and granted duration. E2 updates its From Access Table with E1’s information, SK1 and granted duration. E2 then sends a symmetrically encrypted message with message header auth acknowledgment tag(ACKAUTH) to Auth. 
@@ -82,6 +87,31 @@ To Access Table and From Access Table are tables managed by the client and the s
 a) Exceptions:
 *  If the hash value generated from cipher text is not equal to received hash value, the packet is dropped. 
 * If E1 is not authorized to communicate with E2 in Access Table, Auth sends a symmetrically encrypted message with message header and access reject tagRJCTACC to E1.
+
+**3) Communication Phase:**
+
+The process during communication phase is shown in Figure 6 and the message formats are shown in Figure 7. 
+
+![6](https://user-images.githubusercontent.com/25291535/38537364-de4b1a12-3cab-11e8-8e4d-88efabd30731.png)
+
+
+Being a client entity, E1 has to initiate the communication. To communicate to E2, E1 checks access session availability in its To Access Table and gets E2’s information. E1 encrypts its data to be sent to E2 with request comm tag REQCOMM using SK1. It then sends a symmetrically encrypted message along with message header to E2 (Figure 7(a)).
+
+![7](https://user-images.githubusercontent.com/25291535/38537373-ec90b316-3cab-11e8-95e6-1c27207a2bcc.png)
+
+On receiving an encrypted message from E1, E2 first checks for the availability of access session in its From Access Table. It verifies the integrity and authenticity of the received message as explained above. It decrypts cipher text using SK1 and passes the data to the application layer. If some data is to be sent as a response, the same process is followed, but from E2 to E1 and with response comm tag RESPCOMM (Figure 7(b)).
+
+a) Exceptions:
+
+*  If an access session is not available in To Access Table of E1, it requests Auth to grant access session to communicate with E2 as explained in the previous subsection.
+
+* If a session is not available in From Access Table of E2, then it ignores the message.
+
+* If the hash value generated from cipher text is not equal to received hash value, the packet is dropped.
+
+
+
+
 
 
 The proposed communication architecture is implemented using Python and C languages. The python implementation targets non resource-constrained entities that have availability of Python 3.5 interpreter. The C implementation focuses on resource constraints and portability. The implementations use AES-CBC-128 and RSA-1024 as symmetric and asymmetric encryption algorithms, respectively. They use XORed double encryption of data for hash generation.
