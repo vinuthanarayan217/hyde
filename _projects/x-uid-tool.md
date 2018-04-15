@@ -1,6 +1,6 @@
 ---
 title: "UID Generation for Active Directory"
-tagline: "Username and hashcode generating tool"
+tagline: "Username and hashcode generating tool | [GitHub Repo](https://github.com/sunithan29/uid_gen_ad)"
 website: "https://github.com/sunithan29/uid_gen_ad"
 skills: ["Python"]
 ---
