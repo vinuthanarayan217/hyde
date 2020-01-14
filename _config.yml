@@ -10,10 +10,10 @@ permalink:              /blog/:categories/:title/
 # permalink:            blog/:categories/:year/:month/:day/:title/
 
 # Setup
-title:            'Sunitha Narayan'
-name:             'Sunitha Narayan'
+title:            'Vinutha Narayan'
+name:             'Vinutha Narayan'
 #tagline:          ''
-description:      'Research: Network Security, Applied Cryptography, IoT Security'
+description:      'Google'
 #url:              http://vakila.github.io/
 baseurl:
 # blogurl:          /blog/
@@ -23,14 +23,13 @@ images:         '/img'
 pdfs:           '/pdf'
 
 author:
-  name:           'Sunitha Narayan'
+  name:           'Vinutha Narayan'
   url:            hyde
-  email:          'sunithan@iisc.ac.in'
-  github:         'https://github.com/sunithan29'
+  email:          'vinutha@google.com'
   facebook:       'https://www.facebook.com/evstride'
-  twitter:        'https://twitter.com/sunithan29'
+  twitter:        'https://twitter.com/@vinuthanarayan7'
   googleplus:     ''
-  #linkedin:       'https://www.linkedin.com/in/anjanavakil '
+  linkedin:       'https://www.linkedin.com/in/vinuthanarayan '
 
 paginate:         3
 # paginate_path:    "/blog/page:num/"
@@ -38,8 +37,8 @@ paginate:         3
 # Custom vars
 version:          2.1.0
 
-github:
-  repo:           https://github.com/sunithan29/hyde
+#github:
+ # repo:           https://github.com/sunithan29/hyde
 
 # Collections
 collections:
